@@ -18,9 +18,13 @@
         </div>
         <div id="timer" class="timer display">
             <div class="pill">
+                <span class="move-counter date" id="moveCounter">0</span>
+                <div class="label">Moves</div>
+            </div>
+            <!-- <div class="pill">
               <div id="hours" class="date"></div>
               <div class="label">Hours</div>
-            </div>
+            </div> -->
             <div class="pill">
               <div id="minutes" class="date"></div>
               <div class="label">Minutes</div>
@@ -35,15 +39,16 @@
 
     <main>
         <section>
-            <div id="settings">
-                <p>Number of tiles (<span>16</span>)
-                    <input type="range" value="16" min="16" max="32" step="4">
-                    <button name="reset">Reset</button>
-                    <button name="start">Start</button>
+            <div id="settings" class="btns">
+                <p>
+                    <span class="range-value">16</span>
+                    <input type="range" id="range" value="16" min="16" max="32" step="4">
+                    <!-- <button name="reset">Reset</button> -->
+                    <button class='btn play-button' name="start"><i class="fa fa-play"></i></button>
                 </p>
             </div>
             <div id="gameArea" class="display">
-                <div class="game-status-details">
+                <div class="game-status-details btns">
                     <span class="rating">
                         <input id="rating5" type="radio" name="rating" value="5" disabled>
                         <label for="rating5">5</label>
@@ -56,8 +61,11 @@
                         <input id="rating1" type="radio" name="rating" value="1" disabled>
                         <label for="rating1">1</label>
                     </span>
-                    <span class="move-counter" id="moveCounter">0</span>
-                    <button class="restart-button brown-button" id="restartButton" onClick="startGame()">Restart ↻</button>
+                    
+                    <button class='btn restart-button' id="restartButton" onClick="startGame()"><i class="fa fa-undo"></i></button>
+                    <button class='btn reset-button' name="reset"><i class="fa fa-reply-all"></i></button>
+                    <!-- <button name="reset">Reset</button> -->
+                    <!-- <button class="restart-button" id="restartButton" onClick="startGame()">Restart ↻</button> -->
                 </div>
                 <table class="game-board">
                     <tbody class="game-grid">
