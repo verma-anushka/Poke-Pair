@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+</head>
+<body>
+
+    <header>
+        <div id="intro">
+            <h1>Poke Pair</h1>
+        </div>
+        <div id="timer" class="timer display">
+            <div class="pill">
+              <div id="hours" class="date"></div>
+              <div class="label">Hours</div>
+            </div>
+            <div class="pill">
+              <div id="minutes" class="date"></div>
+              <div class="label">Minutes</div>
+            </div>
+            <div class="pill">
+              <div id="seconds" class="date"></div>
+              <div class="label">Seconds</div>
+            </div>
+        </div>
+        <div class="box"></div>
+    </header>
+
+    <main>
+        <section>
+            <div id="settings">
+                <p>Number of tiles (<span>16</span>)
+                    <input type="range" value="16" min="16" max="32" step="4">
+                    <button name="reset">Reset</button>
+                    <button name="start">Start</button>
+                </p>
+            </div>
+            <div id="gameArea" class="display">
+                <div class="game-status-details">
+                    <span class="rating">
+                        <input id="rating5" type="radio" name="rating" value="5" disabled>
+                        <label for="rating5">5</label>
+                        <input id="rating4" type="radio" name="rating" value="4" disabled>
+                        <label for="rating4">4</label>
+                        <input id="rating3" type="radio" name="rating" value="3" disabled>
+                        <label for="rating3">3</label>
+                        <input id="rating2" type="radio" name="rating" value="2" disabled>
+                        <label for="rating2">2</label>
+                        <input id="rating1" type="radio" name="rating" value="1" disabled>
+                        <label for="rating1">1</label>
+                    </span>
+                    <span class="move-counter" id="moveCounter">0</span>
+                    <button class="restart-button brown-button" id="restartButton" onClick="startGame()">Restart ↻</button>
+                </div>
+                <table class="game-board">
+                    <tbody class="game-grid">
+                        <tr class="game-grid-row" id="game-grid-row-1">
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p1.png" alt="poke1">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p2.png" alt="poke2">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p3.png" alt="poke3">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p4.png" alt="poke4">
+                            </td>
+                        </tr>
+                        <tr class="game-grid-row" id="game-grid-row-2">
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p5.png" alt="poke5">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p6.png" alt="poke6">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p7.png" alt="poke7">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p8.png" alt="poke8">
+                            </td>
+                        </tr>
+                        <tr class="game-grid-row" id="game-grid-row-3">
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p1.png" alt="poke1">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p2.png" alt="poke2">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p3.png" alt="poke3">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p4.png" alt="poke4">
+                            </td>
+                        </tr>
+                        <tr class="game-grid-row" id="game-grid-row-4">
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p5.png" alt="poke5">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p6.png" alt="poke6">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p7.png" alt="poke7">
+                            </td>
+                            <td class="game-card" id="game-card">
+                                <img class="game-card-img" src="img/p8.png" alt="poke8">
+                            </td>
+                        </tr>
+                    </tbody>               
+                </table>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="assets/main.js"></script>
+    <noscript>Your broswer does not support JavaScript!</noscript>
+</body>
+</html>
