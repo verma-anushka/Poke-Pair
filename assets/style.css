@@ -121,16 +121,8 @@ body {
 	margin: 0px auto;
 	border-radius: 20px;
 }
-.range-value {
-    display: inline-block;
-    min-width: 20px;
-    /* padding: .5rem 1rem; */
-    /* margin: 18px 0; */
-    color: darken( gray, 25%);
-    border: 2px solid darken(gray, 14%);
-    border-radius: 6px;
-    background-color: lighten(gray, 4%);
-}
+
+
 [type="range"] {
     -webkit-appearance: none;
     background: transparent;
@@ -266,10 +258,16 @@ body {
     position: absolute;
     transform: rotate(45deg);
 }
-.btns .btn .fa {
+.btns .btn .fa{
     font-size: 24px;
     vertical-align: middle;
     margin-left: 4px;
+}
+.btns .btn span{
+    color: #d6261a;
+    font-size: 24px;
+    font-weight: 700;
+    vertical-align: middle;
 }
 .btns .btn,
 .btns .btn:before,
@@ -284,11 +282,13 @@ body {
 .btns .btn .fa {
   transform: scale(0.8);
 }
+.btns .btn.range-button:before,
 .btns .btn.play-button:before,
 .btns .btn.restart-button:before,
 .btns .btn.reset-button:before {
   background-color: #dc4a38;
 }
+.btns .btn.range-button .fa,
 .btns .btn.play-button .fa,
 .btns .btn.restart-button .fa,
 .btns .btn.reset-button .fa {
@@ -300,10 +300,14 @@ body {
   left: -10%;
 }
 .btns .btn:focus .fa,
-.btns .btn:hover .fa {
+.btns .btn:hover .fa{
   color: #fff;
   /* transform: scale(1); */
 }
+.btns .range-button::before:focus .range,
+.btns .range-button::before:hover .range{
+    color: #fff;
+  }
 .btns .btn.restart-button{
     top: 15%;
     right: 18px;
@@ -344,11 +348,11 @@ body {
 }
 .rating > label:before {
     display: block;
-    opacity: 0;
+    /* opacity: 0; */
     content: '';
     width: 30px;
     height: 30px;
-    background: url('../img/star-off-big.png');
+    /* background: url('../img/star-off-big.png'); */
     background-size: 30px 30px;
     transition: opacity 0.2s linear;
 } 
@@ -402,12 +406,6 @@ body {
     pointer-events: none;
 }
 
-@media only screen and (max-width: 600px) {
-    .modal-footer button {
-        padding: 0.3em 0.3em;
-        width: 50%;
-    }
-}
 @media only screen and (min-width: 600px) and (max-width: 767px) {
     .game-card, .game-card-img {
         width: 5em;

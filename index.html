@@ -41,7 +41,7 @@
         <section>
             <div id="settings" class="btns">
                 <p>
-                    <span class="range-value">16</span>
+                    <button class='btn range-button'><span class="range">16</span></button>
                     <input type="range" id="range" value="16" min="16" max="32" step="4">
                     <!-- <button name="reset">Reset</button> -->
                     <button class='btn play-button' name="start"><i class="fa fa-play"></i></button>
@@ -51,15 +51,15 @@
                 <div class="game-status-details btns">
                     <span class="rating">
                         <input id="rating5" type="radio" name="rating" value="5" disabled>
-                        <label for="rating5">5</label>
+                        <label id="label5" for="rating5">5</label>
                         <input id="rating4" type="radio" name="rating" value="4" disabled>
-                        <label for="rating4">4</label>
+                        <label id="label4" for="rating4">4</label>
                         <input id="rating3" type="radio" name="rating" value="3" disabled>
-                        <label for="rating3">3</label>
+                        <label id="label3" for="rating3">3</label>
                         <input id="rating2" type="radio" name="rating" value="2" disabled>
-                        <label for="rating2">2</label>
+                        <label id="label2" for="rating2">2</label>
                         <input id="rating1" type="radio" name="rating" value="1" disabled>
-                        <label for="rating1">1</label>
+                        <label id="label1" for="rating1">1</label>
                     </span>
                     
                     <button class='btn restart-button' id="restartButton" onClick="startGame()"><i class="fa fa-undo"></i></button>
