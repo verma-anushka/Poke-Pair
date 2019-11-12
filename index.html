@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Memory Game</title>
-
+    <title>Poke Pair</title>
 
     <link rel="stylesheet" href="assets/style.css">
 
@@ -45,11 +44,10 @@
     <main id="container">
         <section>
             <div id="settings" class="btns">
-                <!-- <p> -->
-                    <button class='btn range-button'><span class="range">16</span></button>
-                    <input type="range" id="range" value="16" min="16" max="32" step="4">
-                    <button class='btn play-button' name="start"><i class="fa fa-play"></i></button>
-                <!-- </p> -->
+                <button class="btn range-button"><span class="range">16</span></button>
+                <input type="range" id="range" value="16" min="16" max="32" step="4">
+                <button class="btn play-button" id="tool" data-toggle="tooltip" data-placement="bottom" data-trigger="Play" name="start"><i class="fa fa-play"></i></button>
+                <p>Choose a difficulty level</p>
             </div>
             <div class="container" id="pikachu">
                 <div class="left-ear">
@@ -68,14 +66,12 @@
                     <div class="nose"></div>
                     <div class="mouth"></div>
                     </div>
-                    
                     <div class="mid">
                     <div class="left-hand"></div>
                     <div class="right-hand"></div>
                     <div class="mark1"></div>
                     <div class="mark2"></div>
                     </div>
-                    
                     <div class="left-foot"></div>
                     <div class="right-foot"></div>
                 </div>
@@ -100,9 +96,9 @@
                         <label id="label2" for="rating2">2</label>
                         <input id="rating1" type="radio" name="rating" value="1" disabled>
                         <label id="label1" for="rating1">1</label>
-                    <button class='btn restart-button' id="restartButton" onClick="startGame()"><i class="fa fa-undo"></i></button>
+                    <button class='btn restart-button tool' id="restartButton" onClick="startGame()"><i class="fa fa-undo"></i></button>
                     <!-- <button class='btn reset-button' name="reset"><i class="fa fa-reply-all"></i></button> -->
-                    <button class='btn hint-button' name="hint"><i class="fa fa-lightbulb"></i></button>
+                    <button class='btn hint-button tool' name="hint"><i class="fa fa-lightbulb"></i></button>
                 </div>
                 <table class="game-board" id="game-board">
                     <tbody class="game-grid">

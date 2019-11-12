@@ -1,23 +1,22 @@
-const body = document.querySelector('body'),
+const 
+	// body = document.querySelector('body'),
 	tilesNumber = document.querySelector('#settings span'),
 	tilesInput = document.querySelector('#settings input'),
 	startBtn = document.querySelector('#settings button[name=start]'),
 	resetBtn = document.querySelector('#gameArea button[name=reset]'),
 	hintBtn = document.querySelector('#gameArea button[name=hint]');
 
+// var table = document.getElementById("game-board");
+// var table, td, cols5;
+// var tr = table.getElementsByTagName("tr");
 
 let cardElements = document.getElementsByClassName('game-card');
 let cardElementsArray = [];
 let imgElements = document.getElementsByClassName('game-card-img');
 let imgElementsArray = [];
-let starElements = document.getElementsByClassName('star');
-let starElementsArray = [...starElements];
 let counter = document.getElementById('moveCounter');
 let timer = document.getElementById('timer');
-let totalGameMovesElement = document.getElementById('totalGameMoves');
-let totalGameTimeElement = document.getElementById('totalGameTime');
 let gameArea = document.getElementById('gameArea');
-let gameCard = document.getElementById('game-card');
 let settings = document.getElementById('settings');
 let row1 = document.getElementById('game-grid-row-1');
 let row2 = document.getElementById('game-grid-row-2');
@@ -28,7 +27,6 @@ let rating4 = document.getElementById('label4');
 let rating3 = document.getElementById('label3');
 let rating2 = document.getElementById('label2');
 let container = document.getElementById('pikachu');
-// let rating1 = document.getElementById('label1');
 let ratings = document.getElementById('ratings');
 
 let clicked = false;
@@ -36,8 +34,7 @@ let replay = false;
 let openedCards = [];
 let matchedCards =  [];
 let moves;
-let interval,
-    totalGameTime;
+let interval;
 // var hoursLabel = document.getElementById("hours");
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
@@ -50,10 +47,10 @@ let main = document.getElementById("container");
 function setTime(){
 	++totalSeconds;
 	secondsLabel.innerHTML = pad(totalSeconds%60);
-	console.log(parseInt(totalSeconds/60));
 	minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
 //   hoursLabel.innerHTML = pad(parseInt(totalMinutes/60));
 }
+
 
 function pad(val){
 	var valString = val + "";
@@ -64,11 +61,6 @@ function pad(val){
 	}
 }
 
-hintBtn.addEventListener('click', () => {
-	flashCards();
-	totalSeconds += 120;
-	hintBtn.classList.add("disabled");
-});
 
 function shuffle(array) {
 	let currentIndex = array.length,
@@ -85,7 +77,11 @@ function shuffle(array) {
 	return array;
 }
 
+
 function startGame() {
+
+	gameEnd.classList.add("display");
+	main.style.opacity = '1';
 
 	clearInterval(interval);
 
@@ -128,11 +124,12 @@ function startGame() {
 	moves = 0;
 	counter.innerText = `${moves}`;
 
-	for(let i=0; i<starElementsArray.length; i++) {
-		starElementsArray[i].style.opacity = 1;
-	}
+	// for(let i=0; i<starElementsArray.length; i++) {
+	// 	starElementsArray[i].style.opacity = 1;
+	// }
 	clearInterval(interval);
 }
+
 
 function flashCards() {
 	for(i=0; i<cardElements.length; i++) {
@@ -140,12 +137,12 @@ function flashCards() {
 	}
 	setTimeout(function(){
 		for(i=0; i<cardElements.length; i++) {
-			// console.log(cardElements[i]);
 			if( !cardElements[i].classList.contains("match") )
 				cardElements[i].children[0].classList.remove("show-img")
 		}
 	}, 1000)
 }
+
 
 function displayCard() {
 
@@ -160,6 +157,7 @@ function displayCard() {
 	cardOpen(this);
 }
 
+
 function cardOpen(card) {
 	openedCards.push(card);
 	let len = openedCards.length;
@@ -172,6 +170,7 @@ function cardOpen(card) {
 		}
 	}
 }
+
 
 function matched() {
 	openedCards[0].classList.add("match");
@@ -188,6 +187,7 @@ function matched() {
 	}
 }
 
+
 function unmatched() {
 	openedCards[0].classList.add("unmatched");
 	openedCards[1].classList.add("unmatched");
@@ -202,11 +202,13 @@ function unmatched() {
 	}, 1000)
 }
 
+
 function disable() {
 	cardElementsArray.filter((card, i, cardElementsArray) => {
 		card.classList.add('disabled');
 	})
 }
+
 
 function enable() {
 	cardElementsArray.filter((card, i, cardElementsArray) => {
@@ -216,6 +218,7 @@ function enable() {
 		}
 	})
 }
+
 
 function moveCounter() {
 	moves++;
@@ -240,26 +243,27 @@ function moveCounter() {
 }
 
 function endGame() {
+
+	console.log("Over!");
 	clearInterval(interval);
-	console.log("won");
 	main.style.opacity = '0.2';
     gameEnd.style.opacity = "1";
     gameEnd.classList.remove("display");
-	// totalGameTime = timer.innerHTML;
-	// starRating = document.querySelector('.rating').innerHTML;
-	// totalGameTimeElement.innerHTML = totalGameTime;
 	// totalGameMovesElement.innerHTML = moves;
-	// finalStarRatingElement.innerHTML = starRating;
 	matchedCards = [];
 }
+
 
 function playAgain() {
 	startBtn.removeAttribute('disabled');
 	// resetBtn.removeAttribute('disabled');
 	tilesInput.removeAttribute('disabled');
 	gameArea.classList.add("display");
+	gameEnd.classList.add("display");
+
 	start();
 }
+
 
 function start(){
 	container.classList.add("display");
@@ -277,28 +281,47 @@ window.onload = function () {
 		tilesNumber.innerHTML = tilesInput.value;
 	});
 
-	resetBtn.addEventListener('click', () => {
+	// resetBtn.addEventListener('click', () => {
+	// 	var cols6, cols7, cols8;
+	// 	for (var i = 0; i < tr.length; i++) {
+	// 	td = tr[i].getElementsByTagName("td");
+	// 		cols5 = tr[i].getElementsByClassName("col5");
+	// 		cols6 = tr[i].getElementsByClassName("col6");
+	// 		cols7 = tr[i].getElementsByClassName("col7");
+	// 		cols8 = tr[i].getElementsByClassName("col8");
 
-		gameArea.classList.add("display");
-		container.classList.remove("display");
+	// 		for ( var j = 0; j < cols5.length; j++) {
+	// 			if(tilesInput.value >= '32')
+	// 				cols8[j].classList.add("display");
+	// 			if(tilesInput.value >= '28')
+	// 				cols7[j].classList.add("display");
+	// 			if(tilesInput.value >= '24')
+	// 				cols6[j].classList.add("display");
+	// 			if(tilesInput.value >= '20')
+	// 				cols5[j].classList.add("display");
+	// 		}
 
-		replay = true;
-		ratings.classList.add("display");
+	// 	gameEnd.classList.add("display")
+	// 	gameArea.classList.add("display");
+	// 	container.classList.remove("display");
+	// 	timer.classList.add("display");
+	// 	hintBtn.classList.remove("disabled");
+	// 	replay = true;
+	// 	ratings.classList.add("display");
+	// 	settings.classList.remove("display");
+	// 	startBtn.removeAttribute('disabled', '');
+	// 	tilesInput.removeAttribute('disabled', '');
+	// });
 
-		settings.classList.remove("display");
-		startBtn.removeAttribute('disabled', '');
-		tilesInput.removeAttribute('disabled', '');
+	
+	hintBtn.addEventListener('click', () => {
+		flashCards();
+		totalSeconds += 120;
+		hintBtn.classList.add("disabled");
 	});
 
 	startBtn.addEventListener('click', () => {
 
-		while (cardElementsArray.length > 0) {
-			cardElementsArray.pop();
-		}
-		while (imgElementsArray.length > 0) {
-			imgElementsArray.pop();
-		}
-		// console.log(cardElementsArray);
 		settings.classList.add("display");
 		ratings.classList.remove("display");
 		startBtn.setAttribute('disabled', '');
@@ -306,65 +329,70 @@ window.onload = function () {
 		tilesInput.setAttribute('disabled', '');
 
 		if( tilesInput.value === '32'){
-			row1.innerHTML += '<td class="game-card">' +
+			row1.innerHTML += '<td class="game-card col8" id="game-card">' +
 							  '<img class="game-card-img" src="img/p9.png" alt="poke9">' +
 							  '</td>';
-			row3.innerHTML += '<td class="game-card">' +
+			row3.innerHTML += '<td class="game-card col8" id="game-card">' +
 							  '<img class="game-card-img" src="img/p9.png" alt="poke9">' +
 							  '</td>';
-			row2.innerHTML += '<td class="game-card">' +
+			row2.innerHTML += '<td class="game-card col8" id="game-card">' +
 							  '<img class="game-card-img" src="img/p10.png" alt="poke10">' +
 							  '</td>';
-			row4.innerHTML += '<td class="game-card">' +
+			row4.innerHTML += '<td class="game-card col8" id="game-card">' +
 							  '<img class="game-card-img" src="img/p10.png" alt="poke10">' +
 							  '</td>';
-			
 		}
 		if( tilesInput.value >= '28'){
-			row1.innerHTML += '<td class="game-card">' +
+			row1.innerHTML += '<td class="game-card col7" id="game-card">' +
 							  '<img class="game-card-img" src="img/p11.png" alt="poke11">' +
 							  '</td>';
-			row3.innerHTML += '<td class="game-card">' +
+			row3.innerHTML += '<td class="game-card col7" id="game-card">' +
 							  '<img class="game-card-img" src="img/p11.png" alt="poke11">' +
 							  '</td>';
-			row2.innerHTML += '<td class="game-card">' +
+			row2.innerHTML += '<td class="game-card col7" id="game-card">' +
 							  '<img class="game-card-img" src="img/p12.png" alt="poke12">' +
 							  '</td>';
-			row4.innerHTML += '<td class="game-card">' +
+			row4.innerHTML += '<td class="game-card col7" id="game-card">' +
 							  '<img class="game-card-img" src="img/p12.png" alt="poke12">' +
 							  '</td>';
 		}
 		if( tilesInput.value >= '24'){
-			row1.innerHTML += '<td class="game-card">' +
+			row1.innerHTML += '<td class="game-card col6" id="game-card">' +
 							  '<img class="game-card-img" src="img/p13.png" alt="poke13">' +
 							  '</td>';
-			row3.innerHTML += '<td class="game-card">' +
+			row3.innerHTML += '<td class="game-card col6" id="game-card">' +
 							  '<img class="game-card-img" src="img/p13.png" alt="poke13">' +
 							  '</td>';
-			row2.innerHTML += '<td class="game-card">' +
+			row2.innerHTML += '<td class="game-card col6" id="game-card">' +
 							  '<img class="game-card-img" src="img/p14.png" alt="poke14">' +
 							  '</td>';
-			row4.innerHTML += '<td class="game-card">' +
+			row4.innerHTML += '<td class="game-card col6" id="game-card">' +
 							  '<img class="game-card-img" src="img/p14.png" alt="poke14">' +
 							  '</td>';
 		}
 		if( tilesInput.value >= '20'){
-			row1.innerHTML += '<td class="game-card" id="game-card col5">' +
+			row1.innerHTML += '<td class="game-card col5" id="game-card">' +
 							  '<img class="game-card-img" src="img/p15.png" alt="poke15">' +
 							  '</td>';
-			row3.innerHTML += '<td class="game-card" id="game-card col5">' +
+			row3.innerHTML += '<td class="game-card col5" id="game-card">' +
 							  '<img class="game-card-img" src="img/p15.png" alt="poke15">' +
 							  '</td>';
-			row2.innerHTML += '<td class="game-card" id="game-card col5">' +
+			row2.innerHTML += '<td class="game-card col5" id="game-card">' +
 							  '<img class="game-card-img" src="img/p16.png" alt="poke16">' +
 							  '</td>';
-			row4.innerHTML += '<td class="game-card" id="game-card col5">' +
+			row4.innerHTML += '<td class="game-card col5" id="game-card">' +
 							  '<img class="game-card-img" src="img/p16.png" alt="poke16">' +
 							  '</td>';
 		}
+		// for (var i=0; i<tilesInput.value; i++){
+		// 	if(cardElements[i].classList.contains("display")){
+		// 		continue;
+		// 	}else{
+		// 		cardElementsArray.push(cardElements[i]);
+		// 		imgElementsArray.push(imgElements[i]);
+		// 	}
+		// }
 		cardElementsArray = [...cardElements];
-		// console.log("1");
-		// console.log(cardElementsArray);
 		imgElementsArray = [...imgElements];
 		start();
 	});
