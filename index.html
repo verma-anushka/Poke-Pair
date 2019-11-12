@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Memory Game</title>
+
+
     <link rel="stylesheet" href="assets/style.css">
+
+    <link rel="shortcut icon" href="myFavicon.ico?" type="image/x-icon">
+    <link rel="icon" href="myFavicon.ico?" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 
@@ -43,7 +48,6 @@
                 <!-- <p> -->
                     <button class='btn range-button'><span class="range">16</span></button>
                     <input type="range" id="range" value="16" min="16" max="32" step="4">
-                    <!-- <button name="reset">Reset</button> -->
                     <button class='btn play-button' name="start"><i class="fa fa-play"></i></button>
                 <!-- </p> -->
             </div>
@@ -97,10 +101,10 @@
                         <input id="rating1" type="radio" name="rating" value="1" disabled>
                         <label id="label1" for="rating1">1</label>
                     <button class='btn restart-button' id="restartButton" onClick="startGame()"><i class="fa fa-undo"></i></button>
-                    <button class='btn reset-button' name="reset"><i class="fa fa-reply-all"></i></button>
+                    <!-- <button class='btn reset-button' name="reset"><i class="fa fa-reply-all"></i></button> -->
                     <button class='btn hint-button' name="hint"><i class="fa fa-lightbulb"></i></button>
                 </div>
-                <table class="game-board">
+                <table class="game-board" id="game-board">
                     <tbody class="game-grid">
                         <tr class="game-grid-row" id="game-grid-row-1">
                             <td class="game-card" id="game-card">
