@@ -17,7 +17,7 @@ body {
     color: #ffffff;
     text-shadow: -6px 6px 6px #484848;
     transform: skew(-4deg, -5deg);
-    top: -15px;
+    top: -5px;
     position: relative;
 }
 .timer{
@@ -70,31 +70,30 @@ body {
     background-image: -moz-radial-gradient(40% 40%,circle,rgba(0,0,0,.1) 40%,rgba(0,0,0,1) 100%), -moz-linear-gradient(-90deg, #f33 45%, #333 45%, #3f3f3f 50%, #333 55%, #FFF 55%);
     background-image: -webkit-radial-gradient(40% 40%,circle,rgba(0,0,0,.1) 40%,rgba(0,0,0,1) 100%),-webkit-linear-gradient(-90deg, #f33 45%, #333 45%, #3f3f3f 50%, #333 55%, #FFF 55%);
 }
-  .box:before{
-      text-align: center;
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: 6;
-      width: 1%;	
-      height: 1%;
-      background-color: #FFF;
-      border-radius: 50%;
-      box-shadow: 0 0 0 1px #AAA, 0 0 0 6px #fff, 0 0 0 9px #3f3f3f;
-      margin: 50%;
-  }
-  .box:after{
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: 1;
-      width: 94%;
-      height: 10%;
-      background-color:rgba(0,0,0,0);
-      margin: 45% 3%;
-      box-shadow: 12px 0 0 #FFF, -12px 0 0 #FFF;
-  }
-  
+.box:before{
+    text-align: center;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 6;
+    width: 1%;	
+    height: 1%;
+    background-color: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #AAA, 0 0 0 6px #fff, 0 0 0 9px #3f3f3f;
+    margin: 50%;
+}
+.box:after{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 94%;
+    height: 10%;
+    background-color:rgba(0,0,0,0);
+    margin: 45% 3%;
+    box-shadow: 12px 0 0 #FFF, -12px 0 0 #FFF;
+}
 .box:hover{ 
     -webkit-animation: shak .3s infinite; 
     -moz-animation: shak .3s infinite;
@@ -121,7 +120,6 @@ body {
 	margin: 0px auto;
 	border-radius: 20px;
 }
-
 
 [type="range"] {
     -webkit-appearance: none;
@@ -150,6 +148,7 @@ body {
     transition: all 0.2s ease;
     width: 100%;
     box-shadow: 0 0 0 rgba(0, 0, 0, .2), 0 0 0 rgba(13, 13, 13, .2);
+    color: #000;
     background: #ebeef1;
     border: 0 solid #ebeef1;
     border-radius: 99px;
@@ -163,7 +162,7 @@ body {
     cursor: default;
     height: 30px;
     width: 36px;
-    background-image: url('https://www.doodlemaths.com/wp-content/uploads/2019/04/9-dots-question-300x300.png');
+    background-image: url('../img/slider.png');
     background-size: 34%;
     background-repeat: no-repeat;
     background-position: center;
@@ -239,6 +238,55 @@ body {
     cursor: not-allowed;
 }
 
+#settings p{
+    color: #FFF;
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: center;
+    margin-top: -12px;
+    font-size: 16px;
+}
+
+/*
+#tool{
+    cursor: pointer;
+    position: relative;
+}
+ #tool::before, tool::after{
+    top: 92%;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .15s cubic-bezier(.5, 1, .25, 1);
+    z-index: 1;
+}
+#tool:before{
+    text-transform: uppercase;
+    padding: 15%;
+    width: auto;
+    border-radius: 3px;
+    background: #000;
+    color: #fff;
+    content: attr(data-trigger);
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.2;
+}  
+#tool:after{
+    border: 8px solid transparent;
+    width: 0;
+    content: "";
+    font-size: 0;
+    line-height: 0;
+}
+#tool:hover:before, #tool:hover:after{
+    visibility: visible;
+    opacity: 1;
+}
+ */
+
 .btns .btn {
     display: inline-block;
     background-color: #fff;
@@ -264,10 +312,18 @@ body {
     margin-left: 4px;
 }
 .btns .btn span{
+    position: relative;
+    z-index: 10;
     color: #d6261a;
     font-size: 24px;
     font-weight: 700;
     vertical-align: middle;
+}
+.btns .btn span:hover{
+    color: #FFF;
+}
+.btns .range-button:hover{
+    color: #FFF;
 }
 .btns .btn,
 .btns .btn:before,
@@ -316,12 +372,12 @@ body {
     position: fixed;
 }
 .btns .btn.reset-button{
-    top: 24%;
+    top: 33%;
     right: 18px;
     position: fixed;
 }
 .btns .btn.hint-button{
-    top: 33%;
+    top: 24%;
     right: 18px;
     position: fixed;
 }
@@ -910,7 +966,6 @@ body {
 } 
 
 
-
 .game-board {
     max-width: 50%;
     margin-left: auto;
@@ -1029,12 +1084,19 @@ body {
     animation: animateShowImage 0.4s linear alternate;
 }
 #gameEnd{
+    text-transform: uppercase;
     color: #FFF;
 	position: absolute;
-	top: 50%;
-	left: 32.5%;
-    font-size: 80px;
+	top: 38%;
+    left: 36%;
+    font-family: 'Fugaz One', cursive;
+    font-size: 24px;
 	margin: 0 auto;
+}
+#gameEnd p{
+    font-size: 18px;
+    font-weight: 700;
+    margin: 7%;
 }
 @keyframes animateShowImage {
     0% { transform: rotateY(90deg); opacity: 0;}

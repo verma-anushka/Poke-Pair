@@ -18,6 +18,9 @@ let counter = document.getElementById('moveCounter');
 let timer = document.getElementById('timer');
 let gameArea = document.getElementById('gameArea');
 let settings = document.getElementById('settings');
+let totalMoves = document.getElementById('totalMoves');
+let totalTime = document.getElementById('totalTime');
+let finalRating = document.getElementById('finalRating');
 let row1 = document.getElementById('game-grid-row-1');
 let row2 = document.getElementById('game-grid-row-2');
 let row3 = document.getElementById('game-grid-row-3');
@@ -33,8 +36,10 @@ let clicked = false;
 let replay = false;
 let openedCards = [];
 let matchedCards =  [];
-let moves;
+let moves = 0;
 let interval;
+let ratingValue = 5;
+
 // var hoursLabel = document.getElementById("hours");
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
@@ -86,6 +91,8 @@ function startGame() {
 	clearInterval(interval);
 
 	container.classList.add("display");
+	ratingValue = 5;
+	finalRating.innerHTML = '';
 	secondsLabel.innerHTML = 0;
 	minutesLabel.innerHTML = 0;
 	// hoursLabel.innerHTML = 0;
@@ -95,7 +102,6 @@ function startGame() {
 
 	rating5.style.background = "url('./img/star-on-big.png')";
 	rating5.style.backgroundSize= "30px 30px";
-	
 	rating4.style.background = "url('./img/star-on-big.png')";
 	rating4.style.backgroundSize= "30px 30px";
 	rating3.style.background = "url('./img/star-on-big.png')";
@@ -227,18 +233,22 @@ function moveCounter() {
 	if(moves > ( (tilesInput.value/2) + (tilesInput.value/4) )) {
 		rating5.style.background = "url('./img/star-off-big.png')";
 		rating5.style.backgroundSize= "30px 30px";
+		ratingValue = 4;
 	}
 	if(moves > ( (tilesInput.value/2) + (tilesInput.value/4) + 3)) {
 		rating4.style.background = "url('./img/star-off-big.png')";
 		rating4.style.backgroundSize= "30px 30px";
+		ratingValue = 3;
 	}
 	if(moves > ( (tilesInput.value/2) + (tilesInput.value/4) + 6)) {
 		rating3.style.background = "url('./img/star-off-big.png')";
 		rating3.style.backgroundSize= "30px 30px";
+		ratingValue = 2;
 	}
 	if(moves > ( (tilesInput.value/2) + (tilesInput.value/4) + 10)) {
 		rating2.style.background = "url('./img/star-off-big.png')";
 		rating2.style.backgroundSize= "30px 30px";
+		ratingValue = 1;
 	}
 }
 
@@ -248,8 +258,15 @@ function endGame() {
 	clearInterval(interval);
 	main.style.opacity = '0.2';
     gameEnd.style.opacity = "1";
-    gameEnd.classList.remove("display");
-	// totalGameMovesElement.innerHTML = moves;
+	timer.classList.add("display");
+	gameEnd.classList.remove("display");
+	totalTime.innerHTML = minutesLabel.innerHTML + ":" + secondsLabel.innerHTML;
+	totalMoves.innerHTML = moves;
+	console.log(ratingValue);
+	for(var i = ratingValue; i > 0; i--){
+		console.log(ratingValue);
+		finalRating.innerHTML += '<img src="./img/star-on-big.png" style="background-size: 20px 20px; vertical-align: centre">';
+	}
 	matchedCards = [];
 }
 
