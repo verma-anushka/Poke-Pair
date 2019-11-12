@@ -1,14 +1,8 @@
-const 
-	// body = document.querySelector('body'),
-	tilesNumber = document.querySelector('#settings span'),
-	tilesInput = document.querySelector('#settings input'),
-	startBtn = document.querySelector('#settings button[name=start]'),
-	resetBtn = document.querySelector('#gameArea button[name=reset]'),
-	hintBtn = document.querySelector('#gameArea button[name=hint]');
-
-// var table = document.getElementById("game-board");
-// var table, td, cols5;
-// var tr = table.getElementsByTagName("tr");
+const tilesNumber = document.querySelector('#settings span'),
+	  tilesInput = document.querySelector('#settings input'),
+	  startBtn = document.querySelector('#settings button[name=start]'),
+	  resetBtn = document.querySelector('#gameArea button[name=reset]'),
+	  hintBtn = document.querySelector('#gameArea button[name=hint]');
 
 let cardElements = document.getElementsByClassName('game-card');
 let cardElementsArray = [];
@@ -31,6 +25,11 @@ let rating3 = document.getElementById('label3');
 let rating2 = document.getElementById('label2');
 let container = document.getElementById('pikachu');
 let ratings = document.getElementById('ratings');
+let gameEnd = document.getElementById("gameEnd");
+let main = document.getElementById("container");
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+// var hoursLabel = document.getElementById("hours");
 
 let clicked = false;
 let replay = false;
@@ -39,24 +38,25 @@ let matchedCards =  [];
 let moves = 0;
 let interval;
 let ratingValue = 5;
-
-// var hoursLabel = document.getElementById("hours");
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
-var totalMinutes =  minutesLabel.innerHTML;
-let gameEnd = document.getElementById("gameEnd");
-let main = document.getElementById("container");
-
+let totalSeconds = 0;
+let totalMinutes =  minutesLabel.innerHTML;
+// let table = document.getElementById("game-board");
+// let table, td, cols5;
+// let tr = table.getElementsByTagName("tr");
 	
+hintBtn.addEventListener('click', () => {
+	flashCards();
+	totalSeconds += 120;
+	hintBtn.classList.add("disabled");
+});
+
+// TIME TAKEN
 function setTime(){
 	++totalSeconds;
 	secondsLabel.innerHTML = pad(totalSeconds%60);
 	minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
 //   hoursLabel.innerHTML = pad(parseInt(totalMinutes/60));
 }
-
-
 function pad(val){
 	var valString = val + "";
 	if(valString.length < 2){
@@ -66,7 +66,7 @@ function pad(val){
 	}
 }
 
-
+// SHUFFLE CARDS
 function shuffle(array) {
 	let currentIndex = array.length,
 		temporaryValue,
@@ -82,15 +82,22 @@ function shuffle(array) {
 	return array;
 }
 
-
-function startGame() {
-
-	gameEnd.classList.add("display");
-	main.style.opacity = '1';
-
-	clearInterval(interval);
-
+// START GAME
+function start(){
 	container.classList.add("display");
+	gameArea.classList.remove("display");
+	setTimeout(function() {
+        startGame()
+    }, 1200);
+}
+function startGame() {
+	// clearInterval(interval);
+	main.style.opacity = '1';
+	gameEnd.classList.add("display");
+	container.classList.add("display");
+	timer.classList.remove("display");
+	hintBtn.classList.remove("disabled");
+
 	ratingValue = 5;
 	finalRating.innerHTML = '';
 	secondsLabel.innerHTML = 0;
@@ -99,7 +106,6 @@ function startGame() {
 	totalSeconds = 0;
 	totalMinutes =  minutesLabel.innerHTML;
 	clicked = false;
-
 	rating5.style.background = "url('./img/star-on-big.png')";
 	rating5.style.backgroundSize= "30px 30px";
 	rating4.style.background = "url('./img/star-on-big.png')";
@@ -110,33 +116,23 @@ function startGame() {
 	rating2.style.backgroundSize= "30px 30px";
 
 	let shuffledImages = shuffle(imgElementsArray);
-
 	for(i=0; i<shuffledImages.length; i++) {
 		cardElements[i].innerHTML = "";
 		cardElements[i].appendChild(shuffledImages[i]);
 		cardElements[i].type = `${shuffledImages[i].alt}`;
 		cardElements[i].classList.remove("show", "open", "match", "disabled");
 		cardElements[i].children[0].classList.remove("show-img");
-	}
-
-	timer.classList.remove("display");
-	
+	}	
 	for(let i = 0; i < cardElementsArray.length; i++) {
 		cardElementsArray[i].addEventListener("click", displayCard)
 	}
-
 	flashCards();
-
 	moves = 0;
 	counter.innerText = `${moves}`;
-
-	// for(let i=0; i<starElementsArray.length; i++) {
-	// 	starElementsArray[i].style.opacity = 1;
-	// }
 	clearInterval(interval);
 }
 
-
+// SHOW IMAGES FOR 1 SEC
 function flashCards() {
 	for(i=0; i<cardElements.length; i++) {
 		cardElements[i].children[0].classList.add("show-img")
@@ -149,7 +145,7 @@ function flashCards() {
 	}, 1000)
 }
 
-
+// SHOW IMAGES
 function displayCard() {
 
 	if( !clicked ) {
@@ -162,8 +158,6 @@ function displayCard() {
 	this.classList.toggle("disabled");
 	cardOpen(this);
 }
-
-
 function cardOpen(card) {
 	openedCards.push(card);
 	let len = openedCards.length;
@@ -176,8 +170,6 @@ function cardOpen(card) {
 		}
 	}
 }
-
-
 function matched() {
 	openedCards[0].classList.add("match");
 	openedCards[1].classList.add("match");
@@ -192,8 +184,6 @@ function matched() {
 		endGame();
 	}
 }
-
-
 function unmatched() {
 	openedCards[0].classList.add("unmatched");
 	openedCards[1].classList.add("unmatched");
@@ -208,14 +198,12 @@ function unmatched() {
 	}, 1000)
 }
 
-
+// HEAPLER FUNCTIONS
 function disable() {
 	cardElementsArray.filter((card, i, cardElementsArray) => {
 		card.classList.add('disabled');
 	})
 }
-
-
 function enable() {
 	cardElementsArray.filter((card, i, cardElementsArray) => {
 		card.classList.remove('disabled');
@@ -225,11 +213,10 @@ function enable() {
 	})
 }
 
-
+// MOVES
 function moveCounter() {
 	moves++;
 	counter.innerHTML = `${moves}`;
-
 	if(moves > ( (tilesInput.value/2) + (tilesInput.value/4) )) {
 		rating5.style.background = "url('./img/star-off-big.png')";
 		rating5.style.backgroundSize= "30px 30px";
@@ -252,8 +239,8 @@ function moveCounter() {
 	}
 }
 
+// END GAME
 function endGame() {
-
 	console.log("Over!");
 	clearInterval(interval);
 	main.style.opacity = '0.2';
@@ -262,79 +249,28 @@ function endGame() {
 	gameEnd.classList.remove("display");
 	totalTime.innerHTML = minutesLabel.innerHTML + ":" + secondsLabel.innerHTML;
 	totalMoves.innerHTML = moves;
-	console.log(ratingValue);
 	for(var i = ratingValue; i > 0; i--){
-		console.log(ratingValue);
 		finalRating.innerHTML += '<img src="./img/star-on-big.png" style="background-size: 20px 20px; vertical-align: centre">';
 	}
 	matchedCards = [];
 }
 
-
+// PLAY AGAIN
 function playAgain() {
 	startBtn.removeAttribute('disabled');
 	// resetBtn.removeAttribute('disabled');
 	tilesInput.removeAttribute('disabled');
 	gameArea.classList.add("display");
 	gameEnd.classList.add("display");
-
 	start();
 }
 
-
-function start(){
-	container.classList.add("display");
-	gameArea.classList.remove("display");
-	setTimeout(function() {
-        startGame()
-    }, 1200);
-}
-
-
+// ON PAGE LOAD
 window.onload = function () {
 	
 	// ratings.classList.add("display");
 	tilesInput.addEventListener('input', () => {
 		tilesNumber.innerHTML = tilesInput.value;
-	});
-
-	// resetBtn.addEventListener('click', () => {
-	// 	var cols6, cols7, cols8;
-	// 	for (var i = 0; i < tr.length; i++) {
-	// 	td = tr[i].getElementsByTagName("td");
-	// 		cols5 = tr[i].getElementsByClassName("col5");
-	// 		cols6 = tr[i].getElementsByClassName("col6");
-	// 		cols7 = tr[i].getElementsByClassName("col7");
-	// 		cols8 = tr[i].getElementsByClassName("col8");
-
-	// 		for ( var j = 0; j < cols5.length; j++) {
-	// 			if(tilesInput.value >= '32')
-	// 				cols8[j].classList.add("display");
-	// 			if(tilesInput.value >= '28')
-	// 				cols7[j].classList.add("display");
-	// 			if(tilesInput.value >= '24')
-	// 				cols6[j].classList.add("display");
-	// 			if(tilesInput.value >= '20')
-	// 				cols5[j].classList.add("display");
-	// 		}
-
-	// 	gameEnd.classList.add("display")
-	// 	gameArea.classList.add("display");
-	// 	container.classList.remove("display");
-	// 	timer.classList.add("display");
-	// 	hintBtn.classList.remove("disabled");
-	// 	replay = true;
-	// 	ratings.classList.add("display");
-	// 	settings.classList.remove("display");
-	// 	startBtn.removeAttribute('disabled', '');
-	// 	tilesInput.removeAttribute('disabled', '');
-	// });
-
-	
-	hintBtn.addEventListener('click', () => {
-		flashCards();
-		totalSeconds += 120;
-		hintBtn.classList.add("disabled");
 	});
 
 	startBtn.addEventListener('click', () => {
@@ -401,19 +337,9 @@ window.onload = function () {
 							  '<img class="game-card-img" src="img/p16.png" alt="poke16">' +
 							  '</td>';
 		}
-		// for (var i=0; i<tilesInput.value; i++){
-		// 	if(cardElements[i].classList.contains("display")){
-		// 		continue;
-		// 	}else{
-		// 		cardElementsArray.push(cardElements[i]);
-		// 		imgElementsArray.push(imgElements[i]);
-		// 	}
-		// }
 		cardElementsArray = [...cardElements];
 		imgElementsArray = [...imgElements];
 		start();
 	});
-
-	
 
 }

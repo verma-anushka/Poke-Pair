@@ -6,20 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Poke Pair</title>
 
+    <!-- STYLESHEETS -->
     <link rel="stylesheet" href="assets/style.css">
 
+    <!-- FAVICON -->
     <link rel="shortcut icon" href="myFavicon.ico?" type="image/x-icon">
     <link rel="icon" href="myFavicon.ico?" type="image/x-icon">
+    
+    <!-- ICONS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 
 </head>
 <body>
 
+    <!-- HEADER SECTION -->
     <header>
+        <!-- HEADING -->
         <div id="intro">
             <h1>Poke Pair</h1>
         </div>
+        <!-- TIME AND MOVES -->
         <div id="timer" class="timer display">
             <div class="pill">
                 <span class="move-counter date" id="moveCounter">0</span>
@@ -38,17 +45,21 @@
               <div class="label">Seconds</div>
             </div>
         </div>
+        <!-- POKEBALL (HELP) -->
         <div class="box"></div>
     </header>
 
+    <!-- GAME AREA -->
     <main id="container">
         <section>
+            <!-- BASIC SETTINGS -->
             <div id="settings" class="btns">
                 <button class="btn range-button"><span class="range">16</span></button>
                 <input type="range" id="range" value="16" min="16" max="32" step="4">
                 <button class="btn play-button" id="tool" data-toggle="tooltip" data-placement="bottom" data-trigger="Play" name="start"><i class="fa fa-play"></i></button>
                 <p>Choose a difficulty level</p>
             </div>
+            <!-- PIKACHU -->
             <div class="container" id="pikachu">
                 <div class="left-ear">
                     <div class="punta"></div>
@@ -83,8 +94,10 @@
                     <div class="part5"></div>
                 </div>
             </div>
+            <!-- CARD AREA -->
             <div id="gameArea" class="display">
                 <div class="game-status-details btns display" id="ratings">
+                    <!-- RATING -->
                     <span class="rating">
                         <input id="rating5" type="radio" name="rating" value="5" disabled>
                         <label id="label5" for="rating5">5</label>
@@ -96,10 +109,13 @@
                         <label id="label2" for="rating2">2</label>
                         <input id="rating1" type="radio" name="rating" value="1" disabled>
                         <label id="label1" for="rating1">1</label>
+                    </span>
+                    <!-- BUTTONS -->
                     <button class='btn restart-button tool' id="restartButton" onClick="startGame()"><i class="fa fa-undo"></i></button>
                     <!-- <button class='btn reset-button' name="reset"><i class="fa fa-reply-all"></i></button> -->
                     <button class='btn hint-button tool' name="hint"><i class="fa fa-lightbulb"></i></button>
                 </div>
+                <!-- BASIC 4X4 GRID -->
                 <table class="game-board" id="game-board">
                     <tbody class="game-grid">
                         <tr class="game-grid-row" id="game-grid-row-1">
@@ -164,6 +180,7 @@
         </section>
     </main>
 
+    <!-- GAME END SECTION -->
     <div id="gameEnd" class="display">
         <h2>Congratulations!</h2>
         <p>Moves taken: <span id="totalMoves"></span></p>
