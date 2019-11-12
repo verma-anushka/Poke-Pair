@@ -1,20 +1,21 @@
 const body = document.querySelector('body'),
-	tilesNumber = document.querySelector('#settings p span'),
+	tilesNumber = document.querySelector('#settings span'),
 	tilesInput = document.querySelector('#settings input'),
 	startBtn = document.querySelector('#settings button[name=start]'),
-	resetBtn = document.querySelector('#settings button[name=reset]');
+	resetBtn = document.querySelector('#gameArea button[name=reset]'),
+	hintBtn = document.querySelector('#gameArea button[name=hint]');
+
 
 let cardElements = document.getElementsByClassName('game-card');
-let cardElementsArray;
+let cardElementsArray = [];
 let imgElements = document.getElementsByClassName('game-card-img');
-let imgElementsArray;
+let imgElementsArray = [];
 let starElements = document.getElementsByClassName('star');
 let starElementsArray = [...starElements];
 let counter = document.getElementById('moveCounter');
 let timer = document.getElementById('timer');
 let totalGameMovesElement = document.getElementById('totalGameMoves');
 let totalGameTimeElement = document.getElementById('totalGameTime');
-let finalStarRatingElement = document.getElementById('finalStarRating');
 let gameArea = document.getElementById('gameArea');
 let gameCard = document.getElementById('game-card');
 let settings = document.getElementById('settings');
@@ -26,29 +27,35 @@ let rating5 = document.getElementById('label5');
 let rating4 = document.getElementById('label4');
 let rating3 = document.getElementById('label3');
 let rating2 = document.getElementById('label2');
-let rating1 = document.getElementById('label1');
+let container = document.getElementById('pikachu');
+// let rating1 = document.getElementById('label1');
+let ratings = document.getElementById('ratings');
+
 let clicked = false;
+let replay = false;
 let openedCards = [];
 let matchedCards =  [];
 let moves;
 let interval,
-    totalGameTime,
-	starRating;
+    totalGameTime;
 // var hoursLabel = document.getElementById("hours");
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var totalSeconds = 0;
 var totalMinutes =  minutesLabel.innerHTML;
+let gameEnd = document.getElementById("gameEnd");
+let main = document.getElementById("container");
+
 	
 function setTime(){
 	++totalSeconds;
 	secondsLabel.innerHTML = pad(totalSeconds%60);
+	console.log(parseInt(totalSeconds/60));
 	minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
 //   hoursLabel.innerHTML = pad(parseInt(totalMinutes/60));
 }
 
 function pad(val){
-
 	var valString = val + "";
 	if(valString.length < 2){
 		return "0" + valString;	
@@ -56,6 +63,12 @@ function pad(val){
 		return valString;
 	}
 }
+
+hintBtn.addEventListener('click', () => {
+	flashCards();
+	totalSeconds += 120;
+	hintBtn.classList.add("disabled");
+});
 
 function shuffle(array) {
 	let currentIndex = array.length,
@@ -76,6 +89,7 @@ function startGame() {
 
 	clearInterval(interval);
 
+	container.classList.add("display");
 	secondsLabel.innerHTML = 0;
 	minutesLabel.innerHTML = 0;
 	// hoursLabel.innerHTML = 0;
@@ -96,8 +110,6 @@ function startGame() {
 	let shuffledImages = shuffle(imgElementsArray);
 
 	for(i=0; i<shuffledImages.length; i++) {
-
-		// console.log(cardElements[i]);
 		cardElements[i].innerHTML = "";
 		cardElements[i].appendChild(shuffledImages[i]);
 		cardElements[i].type = `${shuffledImages[i].alt}`;
@@ -128,7 +140,9 @@ function flashCards() {
 	}
 	setTimeout(function(){
 		for(i=0; i<cardElements.length; i++) {
-			cardElements[i].children[0].classList.remove("show-img")
+			// console.log(cardElements[i]);
+			if( !cardElements[i].classList.contains("match") )
+				cardElements[i].children[0].classList.remove("show-img")
 		}
 	}, 1000)
 }
@@ -139,10 +153,6 @@ function displayCard() {
 		interval = setInterval(setTime, 1000);
 		clicked = true;
 	}
-	// setInterval()
-	// console.log("display");
-	// console.log(this.children[0].parentElement);
-	// this.children[0].parentElement.style.backgroundColor = "transparent";
 	this.children[0].classList.toggle('show-img');
 	this.classList.toggle("open");
 	this.classList.toggle("show");
@@ -156,12 +166,8 @@ function cardOpen(card) {
 	if(len === 2) {
 		moveCounter();
 		if(openedCards[0].type === openedCards[1].type) {
-			// console.log(openedCards[0].type);
-			// console.log(openedCards[1].type);
 			matched();
 		} else {
-			// console.log(openedCards[0].type);
-			// console.log(openedCards[1].type);
 			unmatched();
 		}
 	}
@@ -177,7 +183,6 @@ function matched() {
 	matchedCards.push(openedCards[0]);
 	matchedCards.push(openedCards[1]);
 	openedCards = [];
-
 	if(matchedCards.length == tilesInput.value) {
 		endGame();
 	}
@@ -194,7 +199,6 @@ function unmatched() {
 		openedCards[1].children[0].classList.remove('show-img');
 		enable();
 		openedCards = [];
-		
 	}, 1000)
 }
 
@@ -235,64 +239,73 @@ function moveCounter() {
 	}
 }
 
-
 function endGame() {
 	clearInterval(interval);
 	console.log("won");
+	main.style.opacity = '0.2';
+    gameEnd.style.opacity = "1";
+    gameEnd.classList.remove("display");
 	// totalGameTime = timer.innerHTML;
 	// starRating = document.querySelector('.rating').innerHTML;
-	
-	// //show totalGameTime, moves and finalStarRating in Modal
 	// totalGameTimeElement.innerHTML = totalGameTime;
 	// totalGameMovesElement.innerHTML = moves;
 	// finalStarRatingElement.innerHTML = starRating;
-
 	matchedCards = [];
 }
 
 function playAgain() {
 	startBtn.removeAttribute('disabled');
-	resetBtn.removeAttribute('disabled');
+	// resetBtn.removeAttribute('disabled');
 	tilesInput.removeAttribute('disabled');
 	gameArea.classList.add("display");
 	start();
 }
 
 function start(){
-
+	container.classList.add("display");
 	gameArea.classList.remove("display");
 	setTimeout(function() {
         startGame()
     }, 1200);
 }
+
+
 window.onload = function () {
 	
-	// Fade in the body
-	// document.querySelector('body').style.opacity = 0;
-
-	// setTimeout(() => {
-	// 	document.querySelector('body').style.opacity = 1;
-	// });
-
+	// ratings.classList.add("display");
 	tilesInput.addEventListener('input', () => {
 		tilesNumber.innerHTML = tilesInput.value;
 	});
 
-	// resetBtn.addEventListener('click', () => {
-	// 	startBtn.removeAttribute('disabled', '');
-	// 	tilesInput.removeAttribute('disabled', '');
-	// 	// gameArea.classList.add("display");
+	resetBtn.addEventListener('click', () => {
 
-	// 	// playArea.innerHTML = '';
-	// });
+		gameArea.classList.add("display");
+		container.classList.remove("display");
+
+		replay = true;
+		ratings.classList.add("display");
+
+		settings.classList.remove("display");
+		startBtn.removeAttribute('disabled', '');
+		tilesInput.removeAttribute('disabled', '');
+	});
 
 	startBtn.addEventListener('click', () => {
+
+		while (cardElementsArray.length > 0) {
+			cardElementsArray.pop();
+		}
+		while (imgElementsArray.length > 0) {
+			imgElementsArray.pop();
+		}
+		// console.log(cardElementsArray);
 		settings.classList.add("display");
+		ratings.classList.remove("display");
 		startBtn.setAttribute('disabled', '');
 		// resetBtn.setAttribute('disabled', '');
 		tilesInput.setAttribute('disabled', '');
 
-		if( tilesInput.value >= '32'){
+		if( tilesInput.value === '32'){
 			row1.innerHTML += '<td class="game-card">' +
 							  '<img class="game-card-img" src="img/p9.png" alt="poke9">' +
 							  '</td>';
@@ -336,24 +349,22 @@ window.onload = function () {
 							  '</td>';
 		}
 		if( tilesInput.value >= '20'){
-			row1.innerHTML += '<td class="game-card">' +
+			row1.innerHTML += '<td class="game-card" id="game-card col5">' +
 							  '<img class="game-card-img" src="img/p15.png" alt="poke15">' +
 							  '</td>';
-			row3.innerHTML += '<td class="game-card">' +
+			row3.innerHTML += '<td class="game-card" id="game-card col5">' +
 							  '<img class="game-card-img" src="img/p15.png" alt="poke15">' +
 							  '</td>';
-			row2.innerHTML += '<td class="game-card">' +
+			row2.innerHTML += '<td class="game-card" id="game-card col5">' +
 							  '<img class="game-card-img" src="img/p16.png" alt="poke16">' +
 							  '</td>';
-			row4.innerHTML += '<td class="game-card">' +
+			row4.innerHTML += '<td class="game-card" id="game-card col5">' +
 							  '<img class="game-card-img" src="img/p16.png" alt="poke16">' +
 							  '</td>';
 		}
-
-		cardElements = document.getElementsByClassName('game-card');
 		cardElementsArray = [...cardElements];
+		// console.log("1");
 		// console.log(cardElementsArray);
-		imgElements = document.getElementsByClassName('game-card-img');
 		imgElementsArray = [...imgElements];
 		start();
 	});
