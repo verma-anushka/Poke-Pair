@@ -8,7 +8,7 @@ To start playing:
     - Open the 'index.html' file and start playing!
     
     **or**
-  - Visit the link: [GitHub Pages](https://pages.github.com/).
+  - Visit the link: [https://verma-anushka.github.io/Poke-Pair/](https://verma-anushka.github.io/Poke-Pair/).
 
 ## FEATURES :fire:
 - Difficulty Levels :grey_exclamation:
