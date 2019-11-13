@@ -40,9 +40,9 @@ let interval;
 let ratingValue = 5;
 let totalSeconds = 0;
 let totalMinutes =  minutesLabel.innerHTML;
-// let table = document.getElementById("game-board");
-// let table, td, cols5;
-// let tr = table.getElementsByTagName("tr");
+let table = document.getElementById("game-board");
+let td, cols5;
+let tr = table.getElementsByTagName("tr");
 	
 hintBtn.addEventListener('click', () => {
 	flashCards();
@@ -91,13 +91,14 @@ function start(){
     }, 1200);
 }
 function startGame() {
-	// clearInterval(interval);
+
 	main.style.opacity = '1';
 	gameEnd.classList.add("display");
 	container.classList.add("display");
 	timer.classList.remove("display");
 	hintBtn.classList.remove("disabled");
 
+	matchedCards = [];
 	ratingValue = 5;
 	finalRating.innerHTML = '';
 	secondsLabel.innerHTML = 0;
@@ -121,6 +122,8 @@ function startGame() {
 		cardElements[i].appendChild(shuffledImages[i]);
 		cardElements[i].type = `${shuffledImages[i].alt}`;
 		cardElements[i].classList.remove("show", "open", "match", "disabled");
+		cardElements[i].classList.remove("disabled");
+		cardElements[i].style.opacity = "1";
 		cardElements[i].children[0].classList.remove("show-img");
 	}	
 	for(let i = 0; i < cardElementsArray.length; i++) {
@@ -189,8 +192,8 @@ function unmatched() {
 	openedCards[1].classList.add("unmatched");
 	disable();
 	setTimeout(function() {
-		openedCards[0].classList.remove("show", "open", "unmatched");
-		openedCards[1].classList.remove("show", "open", "unmatched");
+		openedCards[0].classList.remove("show", "open", "unmatched", "disabled");
+		openedCards[1].classList.remove("show", "open", "unmatched", "disabled");
 		openedCards[0].children[0].classList.remove('show-img');
 		openedCards[1].children[0].classList.remove('show-img');
 		enable();
