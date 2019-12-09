@@ -8,12 +8,19 @@ To start playing:
     - Open the 'index.html' file and start playing!
     
     **or**
-  - Visit the link: [https://verma-anushka.github.io/Poke-Pair/](https://verma-anushka.github.io/Poke-Pair/).
+
+  - Visit the link: [https://verma-anushka.github.io/Poke-Pair/]https://verma-anushka.github.io/Poke-Pair/.
+
+    **or**
+  
+- You can also find **Poke Pair** and many more cool games at the link:
+  [https://verma-anushka.github.io/Gaming-Zone/]https://verma-anushka.github.io/Gaming-Zone/.
+
 
 ## FEATURES :fire:
 - Difficulty Levels :grey_exclamation:
-- Time taken :hourglass_flowing_sand:
 - Rating :star:	
+- Hint :heavy_exclamation_mark:
 
 If you have more suggestions or you wish to add more features, just open a pull request :shipit:
 
@@ -26,6 +33,12 @@ If you have more suggestions or you wish to add more features, just open a pull 
 - Match cards properly with less moves and in faster time
 
 ## TECHNOLOGIES USED :speech_balloon:
-- HTML5
-- CSS3
-- VANILLA JS
+- **HTML5**: current major version of HTML that subsumes XHTML
+- **CSS3**: latest evolution of the Cascading Style Sheets language 
+- **VANILLA JS**: plain JavaScript without any additional libraries like jQuery
+
+
+## Game Snapshots :camera:
+![Poke Pair](/img/pokePair1.png)
+![Poke Pair](/img/pokePair2.png)
+
