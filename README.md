@@ -9,12 +9,11 @@ To start playing:
     
     **or**
 
-  - Visit the link: [https://verma-anushka.github.io/Poke-Pair/]https://verma-anushka.github.io/Poke-Pair/.
+  - Visit the link: https://verma-anushka.github.io/Poke-Pair/.
 
     **or**
   
-- You can also find **Poke Pair** and many more cool games at the link:
-  [https://verma-anushka.github.io/Gaming-Zone/]https://verma-anushka.github.io/Gaming-Zone/.
+- You can also find **Poke Pair** and many more cool games at the link: https://verma-anushka.github.io/Gaming-Zone/.
 
 
 ## FEATURES :fire:
@@ -39,6 +38,6 @@ If you have more suggestions or you wish to add more features, just open a pull 
 
 
 ## Game Snapshots :camera:
-![Poke Pair](/img/pokePair1.png)
-![Poke Pair](/img/pokePair2.png)
+![Poke Pair](img/pokePair1.PNG)
 
+![Poke Pair](img/pokePair2.PNG)
